@@ -1,0 +1,39 @@
+
+{% load allauth i18n %}
+  
+    <h1 class="text-4xl capitalize font-medium">
+        {% trans "Sign Out" %}
+    </h1>
+    <p class="text-xl mt-3">{% trans 'Are you sure you want to sign out?' %}</p>
+
+
+
+     <div class="flex items-center justify-center gap-4">
+        {% if direct %}
+        <a href="{% url 'home' %}"  class="px-6 py-3 text-xl  font-meduim mt-6 rounded-[30px] bg-input/70 hover:bg-input">
+            {% trans 'Back' %}
+        </a>
+        
+        {% else %}
+        <form method="dialog">
+            <button  class="px-6 py-3 text-xl  font-meduim mt-6 rounded-[30px] bg-input/70 hover:bg-input">
+                {% trans 'Cancel' %}
+            </button>
+            </form>
+        {% endif %}
+        <form method="post" action="{% url 'account_logout' %}" no_visible_fields=True>
+        
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden"
+                       name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}" />
+            {% endif %}
+        
+            <button type="submit" class="px-6 py-3 text-xl text-[#fff] font-meduim mt-6 rounded-[30px] bg-primery/70 hover:bg-primery">
+                {% trans 'Sign Out' %}
+            </button>
+    </form>
+     </div>
+
+

@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="container mx-auto grid lg:grid-cols-2 gap-5 relative">
+    <div class="flex  p-5 lg:pl-10  lg:pr-0 flex-col min-h-screen ">
+      {% include 'components/header.html'   %} 
+        <div class="mt-6 lg:pr-10  flex-1 flex flex-col">
+            {% block form %} {% endblock %}
+          </div>
+    </div>
+  
+  <div class="h-screen hidden lg:block sticky top-0 p-2">
+    <img
+      class="bg-primery/40 rounded-md w-full h-full"
+      src="{% block img %}   {% endblock %}"
+    />
+  </div>
+  {% if form.errors %}
+  <div
+    class="fixed top-5 right-10 bg-red-100 rounded-md p-5 z-10 border border-red-400 text-red-500"
+  >
+        {% for field_errors in form.errors.values %}
+        {% for error in field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+        {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+
+{% endblock %}

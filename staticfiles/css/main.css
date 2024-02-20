@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --white: 255 255 255;
+    --black: 34 34 34;
+    --orange: 249 115 22;
+    --input:245 245 244;
+   
+  }
+  .dark{
+    --white: 12 10 9;
+    --black: 255 255 255;
+    --orange: 234 88 19;
+     --input:41 37 36;
+  }
+} 
+.system #system-btn {
+  background-color:  rgb(var(--orange) / 1);
+  color: #fff;
+}
+.dark:not(.system) #dark-btn {
+  background-color:  rgb(var(--orange) / 1);
+  color: #fff;
+}
+.light:not(.system) #light-btn {
+  background-color:  rgb(var(--orange) / 1);
+  color: #fff;
+}
+
+textarea {
+  height: 200px;
+  resize: none;
+  background:  rgb(var(--input) / 1);;
+}
+body.show-form #form_wraper,
+body.show #overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+body.show-menu #menu {
+ 
+  pointer-events: all;
+  transform: translateX(0);
+}

@@ -1,0 +1,18 @@
+<div
+class="flex gap-1 p-[2px] transition-colors duration-300 focus-within:bg-primery/10 outline outline-1 outline-offset-2 outline-primery/70 overflow-hidden w-full max-w-[350px] rounded-[30px]"
+>
+<input
+  name="q" placeholder="Begin Typing To Search Tag..." 
+   hx-get="{% url 'search' %}"
+   value="{{query}}" 
+   hx-trigger="input changed delay:500ms, search" 
+   hx-target="#notes_wraper" 
+    type="text"
+  class="w-full block h-[40px] px-3 bg-transparent focus:outline-none"
+/>
+<button
+  class="bg-primery/70 text-white min-w-[40px] max-w-[40px] aspect-square flex items-center justify-center rounded-full"
+>
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+</div>

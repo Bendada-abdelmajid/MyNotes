@@ -1,0 +1,79 @@
+{% extends 'two_column.html' %}
+{% load static %} 
+{% block title %} note | login {% endblock %}
+{% block form %}
+    <h1 class="text-4xl font-meduim">Welcome back!</h1>
+    <p class="mt-4 mb-10">
+      Enter your username and password to access your account
+    </p>
+    <form
+      id="login_form"
+      class="mb-10"
+      method="post"
+      action="{% url 'account_signup' %}"
+    >
+      {% csrf_token %}
+      <!-- {{ form.as_p }} -->
+      <p class="mb-7">
+        <label class="mb-2 block" for="id_username">
+          Username
+          <em>*</em>
+        </label>
+        <input
+          id="id_username"
+          class="block w-full p-3 rounded-md bg-input"
+          type="text"
+          name="username"
+          placeholder="Username"
+        />
+      </p>
+      <p class="mb-7">
+        <label class="mb-2 block">
+          Email
+          <em>*</em>
+        </label>
+        <input
+          class="block w-full p-3 rounded-md bg-input"
+          type="email"
+          name="email"
+          placeholder="example@gmail.com"
+        />
+      </p>
+     
+        {% include 'components/password-input.html' with id="id_password1" name="password1" %}
+     
+   
+      {% include 'components/password-input.html' with label="Password (again)" id="id_password2" name="password2" placeholder="Password (again)" %}
+      {% if redirect_field_value %}
+      <input
+        type="hidden"
+        name="{{ redirect_field_name }}"
+        value="{{ redirect_field_value }}"
+      />
+      {% endif %} {% if form.errors %}
+      <div
+        class="fixed top-5 right-10 bg-red-100 rounded-md p-5 z-10 border border-red-400 text-red-500"
+      >
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+      <button
+        class="mt-10 bg-orange-500 text-white w-full p-3 rounded-md text-xl"
+        type="submit"
+      >
+        login
+      </button>
+    </form>
+    <div class="mt-auto">
+      If you have account then
+      <a
+        class="underline font-meduim text-orange-400"
+        href="{% url 'account_login' %}"
+        >login here...
+      </a>
+    </div>
+
+{% endblock %}
+{% block img %}
+{% static 'imgs/notes.svg' %}
+{% endblock %}

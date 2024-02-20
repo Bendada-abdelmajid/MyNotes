@@ -1,0 +1,127 @@
+<header class="{{header_class}} h-[80px]">
+  <nav class="flex justify-between items-center {{class}}">
+    <a href="/" class="font-light text-xl"
+      >Task<b class="font-bold text-primery/70">Harbor</b></a
+    >
+    {% if user.is_authenticated %}
+    <button
+      id="openMenuBtn"
+      class="border border-primery/70 py-1 px-4 rounded-[30px] cursor-pointer"
+    >
+      menu
+    </button>
+    {% else %}
+    <div class="flex justify-between items-center gap-3 py-2">
+      <button
+        onclick="system()"
+        id="system-btn"
+        class="rounded-full border min-w-[40px] aspect-square flex items-center justify-center"
+      >
+        <i class="fa-solid fa-laptop"></i>
+      </button>
+      <button
+        onclick=" lightMode()"
+        id="light-btn"
+        class="rounded-full border min-w-[40px] aspect-square flex items-center justify-center"
+      >
+        <i class="fa-regular fa-sun"></i>
+      </button>
+      <button
+        onclick=" darkMode()"
+        id="dark-btn"
+        class="rounded-full border min-w-[40px] aspect-square flex items-center justify-center"
+      >
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+    <!-- Display content for non-logged-in users -->
+    {% endif %}
+  </nav>
+</header>
+{% if user.is_authenticated %}
+<div
+  id="menu"
+  class="fixed top-0 right-0 transition-transform duration-300 translate-x-full flex flex-col justify-between px-5 z-[99999] h-screen w-full max-w-[400px] bg-white shadow-md"
+>
+  <div class="flex justify-between items-center gap-5 h-[80px]">
+    <h4 class="text-2xl">Welcom {{user}}</h4>
+    <button
+      id="closeMenuBtn"
+      class="capitailze border border-primery/70 py-1 px-3 rounded-[30px] cursor-pointer"
+    >
+      close
+    </button>
+  </div>
+  <nav>
+    <ul class="overflow-hidden">
+        {% url 'account_email' as email %}
+        {% url 'account_change_password' as password %}
+        {% include 'components/link.html' with name="Home" link="/" %}
+        {% include 'components/link.html' with name="Change Email" link=email %}
+        {% include 'components/link.html' with name="Change Password" link=password %}
+
+      <li><hr class="my-10" /></li>
+      <li class="flex justify-between items-center gap-3 py-2">
+        <h4 class="text-xl capitalize flex-1">theme</h4>
+
+        <button
+          onclick="system()"
+          id="system-btn"
+          class="rounded-full border min-w-[40px] aspect-square flex items-center justify-center"
+        >
+          <i class="fa-solid fa-laptop"></i>
+        </button>
+        <button
+          onclick=" lightMode()"
+          id="light-btn"
+          class="rounded-full border min-w-[40px] aspect-square flex items-center justify-center"
+        >
+          <i class="fa-regular fa-sun"></i>
+        </button>
+        <button
+          onclick=" darkMode()"
+          id="dark-btn"
+          class="rounded-full border min-w-[40px] aspect-square flex items-center justify-center"
+        >
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </li>
+      <li>
+        
+        <button
+          id="logout-btn"
+          type="button"
+          class="flex items-center transition-transform duration-300 -translate-x-10 hover:translate-x-0 text-xl capitalize py-2"
+        >
+        <span class="block h-[2px] w-10 bg-black"></span> Logout
+        </button>
+      </li>
+    </ul>
+  </nav>
+  <ul class="flex justify-between items-center">
+    <li>
+      <a href="abdelmajid.bendada1998@gmail.com" class="block hover:text-primery transition-colors uppercase py-2"
+        >Gmail</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://www.linkedin.com/in/abdelmajid-bendada"
+        class="block uppercase py-2 hover:text-primery transition-colors"
+        >Linkedin</a
+      >
+    </li>
+    <li>
+      <a
+        href="https://github.com/Bendada-abdelmajid"
+        class="block uppercase hover:text-primery transition-colors py-2"
+        >Githube</a
+      >
+    </li>
+  </ul>
+</div>
+<dialog id="logout-dialog" class="p-10 rounded-md text-center m-auto">
+  {% include 'components/logout.html' %}
+</dialog>
+
+{% endif %}

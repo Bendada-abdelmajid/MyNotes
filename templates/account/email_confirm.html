@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account %}
+{% load allauth %}
+{% load i18n %}
+
+{% block title %} Verify Email {% endblock %}
+
+
+{% block content %}
+{% include 'components/header.html' with header_class="w-full !h-[60px]" class="container h-full px-5 lg:px-10 mx-auto" %}
+<div class="container relative flex flex-col justify-center items-center flex-1 px-10 mx-auto">
+
+    <img
+    class="w-[300px]"
+    src="{% static 'imgs/email.svg' %}"
+  />
+  {% if confirmation %}
+  {% user_display confirmation.email_address.user as user_display %}
+  {% if can_confirm %}
+
+
+  <p  class="text-xl md:text-3xl text-center max-w-[800px]"> {% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}" class="font-medium mx-1 text-primery ">{{ email }}</a> is an email address for user {{ user_display }}.{% endblocktrans %}</p>
+
+  <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+  {% csrf_token %}
+      
+          <input type="submit" class="px-6 py-3 text-xl text-white font-meduim mt-6 rounded-[30px] bg-primery/70 hover:bg-primery" />
+   
+
+  </form>
+  {% else %}
+  <p  class="text-3xl text-center max-w-[800px]">
+      Unable to confirm {{ email }} because it is already confirmed by a different account.
+  </p>
+{% endif %}
+{% else %}
+
+  {% url 'account_email' as email_url %}
+
+  <p  class="text-3xl text-center max-w-[800px]">This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.</p>
+
+{% endif %}
+
+
+    
+</div>
+
+{% endblock %}

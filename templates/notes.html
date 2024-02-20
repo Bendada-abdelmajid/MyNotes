@@ -1,0 +1,44 @@
+{% load static %}
+
+{% load partials %}
+
+<div class="grid  grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 mt-10" id="note_cont" >
+  {% for note in notes %} 
+  {% partialdef todoitem-partial inline=True %}
+  <div
+    id="note-{{note.pk}}"
+    class="group overflow-hidden relative p-5 border border-input bg-white rounded-md"
+  >
+    <p>{{ note.description }}</p>
+    <div class="flex items-center gap-3 mt-5">
+      <span class="px-3 py-1 bg-orange-50 dark:bg-orange-400 text-sm rounded-md block"
+        >{{note.tag}}</span
+      >
+    </div>
+    <div
+      class="flex gap-2 absolute bottom-0 py-5 right-2 transition-transform duration-300 translate-y-full group-hover:translate-y-0"
+    >
+      <button
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        hx-delete="{% url 'delete' note.pk %}"
+        hx-target="#notes_wraper"
+        hx-on:delete-note="this.closest('#note-{{note.pk}}').remove()"
+        class="bg-red-400 transition-colors duration-300  text-[#fff] min-w-[40px] max-w-[40px] aspect-square flex items-center justify-center hover:bg-red-500 rounded-full"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </button>
+      <button
+        hx-get="{% url 'edit' note.pk %}"
+        hx-target="#form_content"
+        hx-swap="innerHTML"
+        hx-on::after-request="toggleForm()"
+        class="bg-green-400 transition-colors duration-300  text-[#fff] min-w-[40px] max-w-[40px] aspect-square flex items-center justify-center hover:bg-green-500 rounded-full"
+      >
+        <i class="fa-solid fa-pen"></i>
+      </button>
+    </div>
+  </div>
+  {% endpartialdef todoitem-partial  %} 
+  {% endfor %}
+</div>
+

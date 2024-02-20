@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% load static %} {% load partials %} {% block content%} 
+{% include 'components/header.html' with header_class="bg-white shadow-smtop-0 w-full " class="container h-full px-5 lg:px-10 mx-auto" %}
+<main class="container mx-auto  flex-1 px-5 lg:px-10 my-10" id="notes_wraper">
+  {% partialdef notes-partial inline=True %}
+  <div class="{% if not notes and not query %} hidden {% endif %}">
+    <div class="flex justify-between items-center gap-2">
+      {% include 'components/addButton.html' %} 
+      {% include 'components/search.html' %}
+    </div>
+    {% if not notes and query %}
+    <div class="flex flex-col justify-center items-center">
+      <img class="w-[350px] block" src="{% static 'imgs/search.svg' %}" />
+      <h3 class="text-4xl my-2 capitalize">search <b>not found </b></h3>
+      <p class="max-w-[400px] text-center mx-auto">
+        Sorry, we can't find the note you are searching for. Maybe a little
+        spelling mistake?
+      </p>
+    </div>
+    {% else %} {% include 'notes.html' %} {%endif %}
+  </div>
+
+  <div
+    class="{% if notes or query %} hidden {% else %} flex {% endif %} flex-col justify-center items-center"
+  >
+    <img class="w-[250px] block" src="{% static 'imgs/notes-pana.svg' %}" />
+    <h1 class="text-3xl mt-2">Add Entries</h1>
+    <p class="mt-2 mb-3">write what you feel, with no limits</p>
+    {% include 'components/addButton.html' %}
+  </div>
+  {% endpartialdef notes-partial %}
+</main>
+<div
+  id="form_wraper"
+  class="fixed opacity-0 px-5 pointer-events-none z-40  w-full  max-w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+>
+  <div id="form_content" class="p-5 bg-white rounded-md shadow-md border border-input w-full max-h-[90vh] overflow-auto "></div>
+</div>
+{% include 'components/footer.html' %} {% endblock %}

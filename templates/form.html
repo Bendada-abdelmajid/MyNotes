@@ -1,0 +1,37 @@
+<h1 class="text-xl font-medium pb-2 mb-5 border-b border-b-input">
+  {% if note.pk %} Edit {% else %} Add new {% endif %} Note
+</h1>
+<form
+
+  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+  hx-target="{% if not impty %}{% if note.pk %}#note-{{note.pk}}{% else %}#note_cont{% endif %}{% else %} #notes_wraper {% endif %}"
+  hx-post="{% if note.pk %}{% url 'edit' note.pk %}{% else %}{% url 'add_note' %}{% endif %}"
+  hx-swap="{% if not impty %}{% if note.pk %}outerHTML{% else %}beforeend{% endif %}{% endif %}"
+  hx-on::after-request="toggleForm()"
+>
+  <div class="form-control">
+    <label class="mb-2 block">Tag</label>
+    {{form.tag }}
+  </div>
+  <div class="form-control">
+    <label class="mb-2 block">Note </label>
+    {{form.description }}
+  </div>
+  <div class="form-control">
+    <label class="mb-2 block">Reminde me </label>
+    {{form.remind_me_at }}
+  </div>
+
+  <div class="flex justify-end items-center gap-3 mt-5">
+    <button
+      onclick="toggleForm()"
+      type="button"
+      class="px-4 py-2 bg-input/70 rounded-md hover:bg-input"
+    >
+      Cancel
+    </button>
+    <button type="submit" class="px-4 py-2 bg-sky-400 rounded-md text-[#fff]">
+        {% if note.pk %} Edit {% else %} Create{% endif %}
+    </button>
+  </div>
+</form>
