@@ -1,14 +1,14 @@
 {
     "builds": [
       {
-        "src": "dream_shop/wsgi.py",
+        "src": "todoApp/wsgi.py",
         "use": "@vercel/python"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "dream_shop/wsgi.py"
+        "dest": "todoApp/wsgi.py"
       }
     ]
 }
