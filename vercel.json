@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "dream_shop/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "dream_shop/wsgi.py"
+      }
+    ]
+}
