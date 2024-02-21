@@ -1,11 +1,9 @@
 {% extends 'two_column.html' %}
 {% load static %} 
-{% block title %} note | login {% endblock %}
+{% block title %} | Signup {% endblock %}
 {% block form %}
-    <h1 class="text-4xl font-meduim">Welcome back!</h1>
-    <p class="mt-4 mb-10">
-      Enter your username and password to access your account
-    </p>
+    <h1 class="text-4xl font-meduim mb-6">Sign up </h1>
+   
     <form
       id="login_form"
       class="mb-10"
@@ -50,19 +48,14 @@
         name="{{ redirect_field_name }}"
         value="{{ redirect_field_value }}"
       />
-      {% endif %} {% if form.errors %}
-      <div
-        class="fixed top-5 right-10 bg-red-100 rounded-md p-5 z-10 border border-red-400 text-red-500"
-      >
-        {{ form.non_field_errors }}
-      </div>
-      {% endif %}
+      {% endif %} 
       <button
-        class="mt-10 bg-orange-500 text-white w-full p-3 rounded-md text-xl"
+        class="mt-7 bg-orange-500 text-white w-full p-3 rounded-md text-xl"
         type="submit"
       >
         login
       </button>
+      {% include 'components/providers.html' %}
     </form>
     <div class="mt-auto">
       If you have account then

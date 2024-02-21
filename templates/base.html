@@ -4,7 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Task Harbor {% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'imgs/favicon.ico' %}" type="image/x-icon">
+
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     <link
       rel="stylesheet"
@@ -14,6 +16,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body class="flex flex-col min-h-screen text-black bg-white">
     <div

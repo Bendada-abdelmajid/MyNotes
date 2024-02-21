@@ -1,0 +1,14 @@
+{% load socialaccount %}
+
+<div class="flex items-center w-full gap-2 mt-5">
+    <hr class="flex-1">
+    <span>OR</span>
+    <hr class="flex-1 border-input">
+</div>
+<div class="flex gap-5 mt-5">
+    <a class="flex items-center w-full justify-center gap-2 p-3 text-lg rounded-md bg-white shadow-lg hover:shadow-2xl shadow-input" href="{% provider_login_url 'google' %}" >
+        <i class="fa-brands fa-google"></i> <span>Login with Google</span>
+    </a>
+    <a class="flex items-center w-full justify-center border border-input gap-2 p-3 text-lg rounded-md bg-white shadow-lg hover:shadow-2xl shadow-input" href="{% provider_login_url 'github' %}" >
+        <i class="fa-brands fa-github"></i> <span>Login with github</span></a>
+</div>

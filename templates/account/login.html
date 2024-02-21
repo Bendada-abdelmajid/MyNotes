@@ -1,6 +1,7 @@
 {% extends 'two_column.html' %}
+
 {% load static %} 
-{% block title %} note | login {% endblock %}
+{% block title %} | login {% endblock %}
 {% block form %}
 
         <h1 class="text-4xl font-meduim">Welcome back!</h1>
@@ -29,9 +30,14 @@
             {% endif %}
             
             <button class="mt-10 bg-primery text-white w-full p-3 rounded-md text-xl" type="submit">login</button>
-            
+            {% include 'components/providers.html' %}
         </form>
+       
+       
+   
+       
         <div class="mt-auto ">Don't have an account ? <a class="underline font-meduim text-primery/70" href="{% url 'account_signup' %}">Sing Up</a> </div>
+
 {% endblock %}
 {% block img %}
 {% static 'imgs/notes.svg' %}
