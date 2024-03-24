@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+from os import getenv
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -98,15 +99,19 @@ WSGI_APPLICATION = 'todoApp.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  os.getenv('PGDATABASE'),
-        'USER':  os.getenv('PGUSER'),
-        'PASSWORD':  os.getenv('PGPASSWORD'),
-        'HOST':  os.getenv('PGHOST'),
-        'PORT':  os.getenv('PGPORT'),
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': getenv('PGDATABASE'),
+    'USER': getenv('PGUSER'),
+    'PASSWORD': getenv('PGPASSWORD'),
+    'HOST': getenv('PGHOST'),
+    'PORT': getenv('PGPORT', 5432),
+    'OPTIONS': {
+      'sslmode': 'require',
+    },
+  }
 }
 
 # Password validation
